@@ -1,0 +1,201 @@
+<!doctype html><html lang="ru"><head><meta charset="utf-8"><title>Lemnity — презентация</title><style>
+@font-face{font-family:Gilroy;font-weight:400;src:url(../public/fonts/gilroy-regular.woff2) format('woff2')}@font-face{font-family:Gilroy;font-weight:500;src:url(../public/fonts/gilroy-medium.woff2) format('woff2')}@font-face{font-family:Gilroy;font-weight:600;src:url(../public/fonts/gilroy-semibold.woff2) format('woff2')}@font-face{font-family:Gilroy;font-weight:700;src:url(../public/fonts/gilroy-bold.woff2) format('woff2')}@font-face{font-family:Gilroy;font-weight:900;src:url(../public/fonts/gilroy-heavy.woff2) format('woff2')}
+:root{--bg:#fafbff;--soft:#eef3fd;--card:#ffffff;--text:#14161b;--muted:#6b7280;--line:rgba(16,24,40,.1);--blue:#1f55d5;--blue-soft:#c9d6ff}
+@page{size:1920px 1080px;margin:0}
+*{box-sizing:border-box;margin:0;padding:0}
+html,body{background:var(--bg)}
+body{font-family:Gilroy,system-ui,sans-serif;color:var(--text);-webkit-print-color-adjust:exact;print-color-adjust:exact}
+.slide{position:relative;width:1920px;height:1080px;padding:150px 120px 120px;overflow:hidden;page-break-after:always;break-after:page;background:var(--bg)}
+.soft-bg{background:var(--soft)}
+.top{position:absolute;top:54px;left:120px;right:120px;display:flex;justify-content:space-between;align-items:center}
+.logo{display:block;width:auto;filter:brightness(0)}
+.logo.on-blue{filter:none}
+.lbl,.bot{font-size:14px;letter-spacing:.22em;text-transform:uppercase;color:var(--muted)}
+.bot{position:absolute;left:120px;right:120px;bottom:52px;display:flex;justify-content:space-between;border-top:1px solid var(--line);padding-top:22px}
+.accent{color:var(--blue)}
+.muted{color:var(--muted);font-size:22px;line-height:1.5;max-width:520px}
+.eyebrow{font-size:15px;letter-spacing:.26em;text-transform:uppercase;font-weight:500}
+.mega{font-weight:400;font-size:150px;line-height:.95;letter-spacing:-.045em;margin-top:28px}
+.h2{font-weight:400;font-size:92px;line-height:1;letter-spacing:-.04em}
+.lead{font-size:28px;line-height:1.5;color:#3b3f48;margin-top:40px}
+.head{display:flex;justify-content:space-between;align-items:flex-end;gap:60px;margin-bottom:56px}
+.grid2{display:grid;gap:100px;align-items:center;height:100%}
+/* blue cover + contacts */
+.blue{background:var(--blue);color:#fff}
+.blue .cover-body{position:relative;z-index:2;max-width:980px}
+.cover{padding:110px 120px}
+.soft{color:var(--blue-soft)}
+.on-blue-eyebrow{color:var(--blue-soft)}
+.on-blue-lead{color:rgba(255,255,255,.82)}
+.on-blue-bot{color:rgba(255,255,255,.7);border-top-color:rgba(255,255,255,.22)}
+.cover-shot{position:absolute;right:-140px;top:190px;width:1100px;aspect-ratio:16/10;border-radius:18px;overflow:hidden;
+  transform:perspective(2200px) rotateY(-14deg) rotateX(4deg);box-shadow:0 80px 160px -40px rgba(0,0,0,.45);border:1px solid rgba(255,255,255,.25)}
+.cover-shot img{width:100%;height:100%;object-fit:cover;object-position:top;display:block}
+/* about */
+.stats{display:grid;grid-template-columns:1fr 1fr;gap:20px}
+.stat{padding:52px 46px;background:var(--card);border:1px solid var(--line);border-radius:16px}
+.stat b{display:block;font-size:116px;font-weight:400;line-height:1;letter-spacing:-.04em}
+.stat span{display:block;margin-top:18px;font-size:16px;letter-spacing:.22em;text-transform:uppercase;color:var(--muted)}
+.quote{margin-top:64px;font-size:40px;line-height:1.25;font-weight:600;letter-spacing:-.02em;padding-left:28px;border-left:3px solid var(--blue);max-width:680px}
+/* services */
+.cards5{display:grid;grid-template-columns:repeat(5,1fr);gap:20px}
+.card{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:34px 30px;height:640px;display:flex;flex-direction:column;box-shadow:0 20px 40px -30px rgba(31,85,213,.25)}
+.num{font-size:16px;letter-spacing:.2em;color:var(--blue);font-weight:600}
+.card h3{font-size:30px;font-weight:500;line-height:1.15;margin-top:26px;letter-spacing:-.01em}
+.card p{font-size:18px;line-height:1.55;color:var(--muted);margin-top:20px}
+.card ul{list-style:none;margin-top:auto}
+.card li{font-size:17px;line-height:1.4;padding:12px 0;border-top:1px solid var(--line)}
+.card li::before{content:'— ';color:var(--blue)}
+/* process */
+.steps{list-style:none;display:grid;grid-template-columns:repeat(5,1fr);gap:20px}
+.steps li{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:32px 28px;min-height:330px}
+.stepnum{font-size:56px;font-weight:400;color:var(--blue);letter-spacing:-.03em}
+.steps h3{font-size:26px;font-weight:500;margin-top:30px;line-height:1.2}
+.steps p{font-size:18px;line-height:1.55;color:var(--muted);margin-top:16px}
+.why{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;margin-top:40px}
+.why div{border-top:2px solid var(--blue);padding-top:22px}
+.why b{display:block;font-size:26px;font-weight:600}
+.why span{display:block;margin-top:10px;font-size:18px;line-height:1.5;color:var(--muted)}
+/* own product */
+.flag{display:grid;grid-template-columns:.8fr 1.4fr;gap:80px;align-items:center;height:100%}
+.pill{display:inline-block;background:var(--blue);color:#fff;font-weight:600;font-size:14px;letter-spacing:.22em;text-transform:uppercase;padding:9px 18px;border-radius:999px}
+.flag-logo{display:block;height:110px;margin-top:44px;filter:brightness(0)}
+.tags{font-size:18px;color:var(--muted);margin-top:26px;letter-spacing:.02em}
+.link{font-size:20px;color:var(--blue);margin-top:30px;letter-spacing:.04em;font-weight:500}
+.shot{border-radius:16px;overflow:hidden;border:1px solid var(--line);background:#fff}
+.shot img{display:block;width:100%;height:100%;object-fit:cover;object-position:top}
+.shot-xl{aspect-ratio:16/10;box-shadow:0 60px 120px -50px rgba(31,85,213,.45)}
+/* projects */
+.pair{display:grid;grid-template-columns:1fr 1fr;gap:40px}
+.pcard .shot{aspect-ratio:16/9;box-shadow:0 30px 60px -40px rgba(16,24,40,.35)}
+.pmeta{display:flex;justify-content:space-between;gap:30px;margin-top:22px}
+.pmeta h3{font-size:36px;font-weight:500;letter-spacing:-.02em}
+.pmeta p{font-size:19px;line-height:1.45;color:#3b3f48;margin-top:8px;max-width:620px}
+.pmeta .tags{font-size:16px;color:var(--muted)}
+.pmeta .link,.soon{white-space:nowrap;font-size:16px;letter-spacing:.06em;margin-top:14px}
+.soon{color:var(--blue);border:1px solid rgba(31,85,213,.4);border-radius:999px;padding:8px 16px;height:max-content;text-transform:uppercase;letter-spacing:.2em;font-size:13px}
+/* gallery */
+.bento{display:grid;gap:16px;height:640px;grid-template-columns:repeat(4,1fr);grid-template-rows:repeat(3,1fr);grid-template-areas:"a a b c" "a a d e" "f g h h"}
+.tile{border-radius:14px;overflow:hidden;background:#fff;border:1px solid var(--line)}
+.tile img{width:100%;height:100%;object-fit:cover;object-position:top;display:block}
+.mosaic{display:grid;grid-template-columns:repeat(6,1fr);grid-template-rows:repeat(2,310px);gap:16px}
+/* clients */
+.logos{display:grid;grid-template-columns:repeat(4,1fr);gap:16px}
+.logo-cell{height:190px;display:grid;place-items:center;background:var(--card);border:1px solid var(--line);border-radius:16px}
+.logo-cell img{max-width:62%;max-height:70px;filter:brightness(0);opacity:.78}
+.logo-cell img.keep{filter:grayscale(1) contrast(1.2)}
+.logo-cell.more{font-size:20px;letter-spacing:.2em;text-transform:uppercase;color:var(--muted)}
+/* contacts */
+.contacts{display:grid;grid-template-columns:repeat(3,auto);gap:70px;margin-top:60px;justify-content:start}
+.contacts span{display:block;font-size:15px;letter-spacing:.24em;text-transform:uppercase;color:var(--blue-soft)}
+.contacts b{display:block;font-size:34px;font-weight:500;margin-top:14px}
+</style></head><body><section class="slide blue cover">
+  <div class="cover-body">
+    <img class="logo on-blue" src="../public/clients/lemnity.svg" style="height:64px" alt="Lemnity">
+    <p class="eyebrow on-blue-eyebrow" style="margin-top:130px">Студия цифровых продуктов · Сайты · UI/UX · Бренды</p>
+    <h1 class="mega">Делаем<br>сложное<br><span class="soft">простым.</span></h1>
+    <p class="lead on-blue-lead" style="max-width:640px">Создаём сайты, интерфейсы, бренды и цифровые продукты, которые помогают людям и бизнесу расти.</p>
+  </div>
+  <div class="cover-shot"><img src="img/lemnity.jpg" alt=""></div>
+  <footer class="bot on-blue-bot"><span>Lemnity · Тюмень · работаем по всему миру</span><span>lemnity.ru</span></footer>
+</section>
+<section class="slide">
+  <header class="top"><img class="logo " src="../public/clients/lemnity.svg" style="height:24px" alt="Lemnity"><span class="lbl">02 / О нас</span></header>
+  <footer class="bot"><span>lemnity.ru</span><span>02 / 12</span></footer>
+  <div class="grid2" style="grid-template-columns: 1fr 1.05fr">
+    <div>
+      <h2 class="h2">Студия<br>и платформа</h2>
+      <p class="lead" style="margin-top:44px;max-width:660px">Lemnity — студия цифровых продуктов и собственная платформа для создания сайтов, чат-ботов и цифровых продуктов. 12+ лет опыта в дизайне, продуктовой разработке и визуальных коммуникациях.</p>
+      <p class="quote">«Хороший дизайн делает сложное понятным, а&nbsp;возможное&nbsp;— ближе.»</p>
+    </div>
+    <div class="stats">
+      <div class="stat"><b>12+</b><span>лет опыта</span></div>
+      <div class="stat"><b>50+</b><span>проектов</span></div>
+      <div class="stat"><b>3</b><span>страны</span></div>
+      <div class="stat"><b class="accent">∞</b><span>идей в работе</span></div>
+    </div>
+  </div>
+</section>
+<section class="slide">
+  <header class="top"><img class="logo " src="../public/clients/lemnity.svg" style="height:24px" alt="Lemnity"><span class="lbl">03 / Услуги</span></header>
+  <footer class="bot"><span>lemnity.ru</span><span>03 / 12</span></footer>
+  <div class="head"><h2 class="h2">Что мы делаем</h2><p class="muted">Сайты, интерфейсы, бренды и цифровые продукты — от идеи до запуска.</p></div>
+  <div class="cards5"><article class="card"><span class="num">01</span><h3>Разработка сайтов и веб-приложений</h3><p>Сайты и сервисы, которые быстро загружаются и понятны с первого экрана. Дизайн и код в одних руках — без разрыва между макетом и результатом.</p><ul><li>корпоративный сайт или сервис</li><li>адаптив для телефона и компьютера</li><li>личные кабинеты и формы</li></ul></article><article class="card"><span class="num">02</span><h3>UI/UX-дизайн интерфейсов</h3><p>Интерфейсы, в которых пользователь не думает, куда нажать: от сценариев и структуры до макетов и прототипа.</p><ul><li>сценарии и структура</li><li>кликабельный прототип</li><li>дизайн-система и UI-кит</li></ul></article><article class="card"><span class="num">03</span><h3>Лендинги и интернет-магазины</h3><p>Страницы, которые ведут к одному действию, и магазины, где удобно выбирать и покупать.</p><ul><li>лендинг или многостраничный сайт</li><li>каталог и корзина</li><li>формы заявок</li></ul></article><article class="card"><span class="num">04</span><h3>Брендинг и айдентика</h3><p>Цельный бренд — от логотипа до сайта и мерча, собранный в понятные правила для команды.</p><ul><li>логотип и знак</li><li>цвета, шрифты, стиль</li><li>носители, мерч и гайд</li></ul></article><article class="card"><span class="num">05</span><h3>Цифровой продукт и MVP</h3><p>От гипотезы и прототипа до первой версии. Знаем, что важно на старте, а что можно отложить — сами строим свою платформу.</p><ul><li>состав первой версии</li><li>дизайн и разработка MVP</li><li>запуск и развитие</li></ul></article></div>
+</section>
+<section class="slide">
+  <header class="top"><img class="logo " src="../public/clients/lemnity.svg" style="height:24px" alt="Lemnity"><span class="lbl">04 / Процесс</span></header>
+  <footer class="bot"><span>lemnity.ru</span><span>04 / 12</span></footer>
+  <div class="head"><h2 class="h2">Как мы работаем</h2><p class="muted">Прозрачно, по этапам и с видимым результатом на каждом шаге.</p></div>
+  <ol class="steps"><li><span class="stepnum">01</span><h3>Знакомство и задача</h3><p>Обсуждаем задачу, аудиторию и сроки. Честно говорим, что реально, а что лучше убрать.</p></li><li><span class="stepnum">02</span><h3>Структура и концепция</h3><p>Собираем структуру, сценарии и первую концепцию. Согласуем направление до детальной работы.</p></li><li><span class="stepnum">03</span><h3>Дизайн и прототип</h3><p>Макеты и кликабельный прототип — правки на раннем этапе, а не в конце.</p></li><li><span class="stepnum">04</span><h3>Разработка</h3><p>Верстаем и программируем. Промежуточные версии показываем по ходу.</p></li><li><span class="stepnum">05</span><h3>Запуск и поддержка</h3><p>Проверяем на разных устройствах, запускаем и остаёмся на связи для доработок.</p></li></ol>
+  <div class="why">
+    <div><b>Один ответственный</b><span>дизайн, разработка и организация процесса — без испорченного телефона</span></div>
+    <div><b>Удалённо по всему миру</b><span>Тюмень, разные города и страны; общаемся в удобном мессенджере</span></div>
+    <div><b>Поддержка после запуска</b><span>исправляем, дорабатываем и развиваем проект дальше</span></div>
+  </div>
+</section>
+<section class="slide soft-bg">
+  <header class="top"><img class="logo " src="../public/clients/lemnity.svg" style="height:24px" alt="Lemnity"><span class="lbl">05 / Наш продукт</span></header>
+  <footer class="bot"><span>lemnity.ru</span><span>05 / 12</span></footer>
+  <div class="flag">
+    <div>
+      <span class="pill">Наш продукт</span>
+      <img class="flag-logo" src="../public/clients/lemnity.svg" alt="Lemnity">
+      <p class="lead">Платформа для создания сайтов, чат-ботов и цифровых продуктов: сайт, виджеты, чат, бот с оплатами, заявки и аналитика — в одном окне.</p>
+      <p class="tags">#SaaS &nbsp; #Конструктор &nbsp; #AI &nbsp; #Продукт</p>
+      <p class="link">lemnity.ru</p>
+    </div>
+    <div class="shot shot-xl"><img src="img/lemnity.jpg" alt=""></div>
+  </div>
+</section>
+<section class="slide">
+  <header class="top"><img class="logo " src="../public/clients/lemnity.svg" style="height:24px" alt="Lemnity"><span class="lbl">06 / Проекты</span></header>
+  <footer class="bot"><span>lemnity.ru</span><span>06 / 12</span></footer>
+  <div class="head"><h2 class="h2">Проекты студии</h2><p class="muted">Продукты, бренды и цифровые решения, которые делают идеи реальностью.</p></div>
+  <div class="pair"><article class="pcard"><div class="shot"><img src="img/dom-nauki.jpg" alt=""></div>
+      <div class="pmeta"><div><h3>Дом науки и техники</h3><p>Образовательная платформа для профессионалов: семинары, курсы и вебинары.</p><p class="tags">#Образование #Сайт #Гос.&nbsp;сектор</p></div><span class="link">web.tumtipb.ru</span></div></article><article class="pcard"><div class="shot"><img src="img/prostyle.jpg" alt=""></div>
+      <div class="pmeta"><div><h3>ProStyle</h3><p>Корпоративные подарки и сувенирная продукция с логотипом, Тюмень. Интернет-магазин с каталогом.</p><p class="tags">#Бренд #Интернет-магазин #Дизайн</p></div><span class="link">prostyle.agency</span></div></article></div>
+</section>
+<section class="slide">
+  <header class="top"><img class="logo " src="../public/clients/lemnity.svg" style="height:24px" alt="Lemnity"><span class="lbl">07 / Проекты</span></header>
+  <footer class="bot"><span>lemnity.ru</span><span>07 / 12</span></footer>
+  <div class="head"><h2 class="h2">Проекты студии</h2><p class="muted">Продукты, бренды и цифровые решения, которые делают идеи реальностью.</p></div>
+  <div class="pair"><article class="pcard"><div class="shot"><img src="img/sphagnum.jpg" alt=""></div>
+      <div class="pmeta"><div><h3>Sphagnum AE</h3><p>Живые субстраты для зелёных крыш, вертикальных садов и интерьеров. B2B-сайт для рынка ОАЭ.</p><p class="tags">#Сайт #Эко #B2B</p></div><span class="link">lemnity.github.io/sphgnm</span></div></article><article class="pcard"><div class="shot"><img src="img/turdus.jpg" alt=""></div>
+      <div class="pmeta"><div><h3>Модный театр TURDUS</h3><p>Иммерсивные спектакли в барах, ресторанах, квартире и на улицах Екатеринбурга. Афиша и продажа билетов.</p><p class="tags">#Сайт #Афиша #Театр</p></div><span class="link">lemnity.github.io/trds</span></div></article></div>
+</section>
+<section class="slide">
+  <header class="top"><img class="logo " src="../public/clients/lemnity.svg" style="height:24px" alt="Lemnity"><span class="lbl">08 / Галерея работ</span></header>
+  <footer class="bot"><span>lemnity.ru</span><span>08 / 12</span></footer>
+  <div class="head"><h2 class="h2">Брендинг и мерч</h2><p class="muted">Айдентика, полиграфия и мерч — то, что держат в руках.</p></div>
+  <div class="bento"><div class="tile" style="grid-area:a"><img src="../public/works/work-01-full.webp" alt=""></div><div class="tile" style="grid-area:b"><img src="../public/works/work-04.webp" alt=""></div><div class="tile" style="grid-area:c"><img src="../public/works/work-05.webp" alt=""></div><div class="tile" style="grid-area:d"><img src="../public/works/work-02.webp" alt=""></div><div class="tile" style="grid-area:e"><img src="../public/works/work-12.webp" alt=""></div><div class="tile" style="grid-area:f"><img src="../public/works/work-09.webp" alt=""></div><div class="tile" style="grid-area:g"><img src="../public/works/work-15.webp" alt=""></div><div class="tile" style="grid-area:h"><img src="../public/works/work-19-full.webp" alt=""></div></div>
+</section>
+<section class="slide">
+  <header class="top"><img class="logo " src="../public/clients/lemnity.svg" style="height:24px" alt="Lemnity"><span class="lbl">09 / Галерея работ</span></header>
+  <footer class="bot"><span>lemnity.ru</span><span>09 / 12</span></footer>
+  <div class="head"><h2 class="h2">Интерфейсы и сайты</h2><p class="muted">Сервисы, приложения и сайты — то, чем пользуются каждый день.</p></div>
+  <div class="bento"><div class="tile" style="grid-area:a"><img src="../public/works/work-10-full.webp" alt=""></div><div class="tile" style="grid-area:b"><img src="../public/works/work-35.webp" alt=""></div><div class="tile" style="grid-area:c"><img src="../public/works/work-25.webp" alt=""></div><div class="tile" style="grid-area:d"><img src="../public/works/work-28.webp" alt=""></div><div class="tile" style="grid-area:e"><img src="../public/works/work-40.webp" alt=""></div><div class="tile" style="grid-area:f"><img src="../public/works/work-46.webp" alt=""></div><div class="tile" style="grid-area:g"><img src="../public/works/work-20.webp" alt=""></div><div class="tile" style="grid-area:h"><img src="../public/works/work-03-full.webp" alt=""></div></div>
+</section>
+<section class="slide">
+  <header class="top"><img class="logo " src="../public/clients/lemnity.svg" style="height:24px" alt="Lemnity"><span class="lbl">10 / Клиенты</span></header>
+  <footer class="bot"><span>lemnity.ru</span><span>10 / 12</span></footer>
+  <div class="head"><h2 class="h2">Нам доверяют</h2><p class="muted">Компании и команды, с которыми мы запускали бренды, сайты и продукты.</p></div>
+  <div class="logos"><div class="logo-cell"><img src="../public/clients/prostyle.svg" alt="ProStyle" class=""></div><div class="logo-cell"><img src="../public/clients/i-doors.svg" alt="i-Doors" class=""></div><div class="logo-cell"><img src="../public/clients/fifty-four.svg" alt="Fifty Four" class=""></div><div class="logo-cell"><img src="../public/clients/mstroy.svg" alt="MStroy" class=""></div><div class="logo-cell"><img src="../public/clients/simourg.svg" alt="Simourg" class=""></div><div class="logo-cell"><img src="../public/clients/teatr-liberta.webp" alt="Театр Либерта" class=""></div><div class="logo-cell"><img src="../public/clients/msp.svg" alt="MSP" class=""></div><div class="logo-cell"><img src="../public/clients/simval.svg" alt="Simval" class=""></div><div class="logo-cell"><img src="../public/clients/idealnaya-para.svg" alt="Идеальная пара" class=""></div><div class="logo-cell"><img src="../public/clients/dvigex.webp" alt="Dvigex" class=""></div><div class="logo-cell"><img src="../public/clients/c-mark.svg" alt="C" class="keep"></div><div class="logo-cell more">и другие</div></div>
+</section>
+<section class="slide">
+  <header class="top"><img class="logo " src="../public/clients/lemnity.svg" style="height:24px" alt="Lemnity"><span class="lbl">11 / Портфолио</span></header>
+  <footer class="bot"><span>lemnity.ru</span><span>11 / 12</span></footer>
+  <div class="head"><h2 class="h2">46 работ в портфолио</h2><p class="muted">Полная галерея работ — на simakoov.ru в разделе «Работы».</p></div>
+  <div class="mosaic"><div class="tile"><img src="../public/works/work-06.webp" alt=""></div><div class="tile"><img src="../public/works/work-34.webp" alt=""></div><div class="tile"><img src="../public/works/work-23.webp" alt=""></div><div class="tile"><img src="../public/works/work-27.webp" alt=""></div><div class="tile"><img src="../public/works/work-11.webp" alt=""></div><div class="tile"><img src="../public/works/work-16.webp" alt=""></div><div class="tile"><img src="../public/works/work-21.webp" alt=""></div><div class="tile"><img src="../public/works/work-13.webp" alt=""></div><div class="tile"><img src="../public/works/work-24.webp" alt=""></div><div class="tile"><img src="../public/works/work-31.webp" alt=""></div><div class="tile"><img src="../public/works/work-37.webp" alt=""></div><div class="tile"><img src="../public/works/work-42.webp" alt=""></div></div>
+</section>
+<section class="slide blue cover">
+  <div class="cover-body">
+    <img class="logo on-blue" src="../public/clients/lemnity.svg" style="height:64px" alt="Lemnity">
+    <h2 class="mega" style="margin-top:110px;font-size:124px;white-space:nowrap">Давайте<br>создадим что&#8209;то<br><span class="soft">вместе.</span></h2>
+    <div class="contacts">
+      <div><span>Почта</span><b>thesimakov@gmail.com</b></div>
+      <div><span>Telegram</span><b>t.me/simakoov</b></div>
+      <div><span>Сайт</span><b>lemnity.ru</b></div>
+    </div>
+  </div>
+  <footer class="bot on-blue-bot"><span>Lemnity · студия цифровых продуктов</span><span>12 / 12</span></footer>
+</section></body></html>
