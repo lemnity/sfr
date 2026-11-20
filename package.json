@@ -7,6 +7,7 @@
     "dev": "vite",
     "build": "tsc -b && vite build",
     "preview": "vite preview",
+    "setup:server": "sh scripts/setup-server.sh",
     "deploy": "sh scripts/deploy.sh",
     "deploy:feedback": "sh scripts/deploy-feedback.sh"
   },
