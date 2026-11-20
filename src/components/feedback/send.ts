@@ -10,6 +10,16 @@ export interface FeedbackValues {
 }
 
 export type FieldName = 'name' | 'contact' | 'message'
+
+/** Consent checkboxes. `personalData` is required; the rest are optional opt-ins. */
+export interface Consents {
+  personalData: boolean
+  newsletter: boolean
+  nda: boolean
+  call: boolean
+}
+export const CONSENT_KEYS = ['personalData', 'newsletter', 'nda', 'call'] as const satisfies readonly (keyof Consents)[]
+export const NO_CONSENTS: Consents = { personalData: false, newsletter: false, nda: false, call: false }
 export type ErrorKey = Exclude<keyof Content['feedback']['errors'], 'summary'>
 /** Error *keys* (not text) so messages follow a language switch while the dialog is open. */
 export type FieldErrors = Partial<Record<FieldName, ErrorKey>>
@@ -51,7 +61,10 @@ export function validateAll(values: FeedbackValues): FieldErrors {
   return out
 }
 
-export function buildPayload(values: FeedbackValues, topics: string[], lang: Lang) {
+/** Consent marks in the letter are always Russian — the owner reads it. */
+const yesNo = (v: boolean) => (v ? 'да' : 'нет')
+
+export function buildPayload(values: FeedbackValues, topics: string[], lang: Lang, consents: Consents) {
   const name = values.name.trim()
   const contact = values.contact.trim()
   return {
@@ -64,6 +77,10 @@ export function buildPayload(values: FeedbackValues, topics: string[], lang: Lan
     message: values.message.trim(),
     language: lang.toUpperCase(),
     page: typeof window !== 'undefined' ? window.location.href : '',
+    consent_personal_data: yesNo(consents.personalData),
+    newsletter: yesNo(consents.newsletter),
+    nda: yesNo(consents.nda),
+    callback_ok: yesNo(consents.call),
   }
 }
 

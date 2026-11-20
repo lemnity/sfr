@@ -1,4 +1,5 @@
 import { useEffect, useRef, useState } from 'react'
+import type React from 'react'
 import type { FormEvent } from 'react'
 import Box from '@mui/material/Box'
 import Stack from '@mui/material/Stack'
@@ -8,6 +9,8 @@ import Chip from '@mui/material/Chip'
 import Button from '@mui/material/Button'
 import IconButton from '@mui/material/IconButton'
 import Link from '@mui/material/Link'
+import Checkbox from '@mui/material/Checkbox'
+import FormControlLabel from '@mui/material/FormControlLabel'
 import DialogContent from '@mui/material/DialogContent'
 import Close from '@mui/icons-material/Close'
 import ArrowForward from '@mui/icons-material/ArrowForward'
@@ -19,8 +22,12 @@ import { colors, microLabel, outlinedIconButtonSx } from '../../theme'
 import { useLang } from '../../i18n'
 import type { Content, FeedbackTopicId } from '../../data/content'
 import { feedbackFallbackEmail } from '../../data/contact-form'
+import PrivacyDialog from './PrivacyDialog'
 import {
+  CONSENT_KEYS,
   FIELDS,
+  NO_CONSENTS,
+  type Consents,
   buildPayload,
   fallbackMailto,
   sendFeedback,
@@ -101,6 +108,10 @@ export default function FeedbackForm({
   const [status, setStatus] = useState<Status>('idle')
   const [failure, setFailure] = useState<FailureKind>('server')
   const [presetN, setPresetN] = useState(preset.n)
+  const [consents, setConsents] = useState<Consents>(NO_CONSENTS)
+  const [consentError, setConsentError] = useState(false)
+  const [policyOpen, setPolicyOpen] = useState(false)
+  const consentRef = useRef<HTMLInputElement | null>(null)
   const sending = useRef(false)
   const inputs = useRef<Partial<Record<FieldName, HTMLInputElement | HTMLTextAreaElement | null>>>({})
   const resultRef = useRef<HTMLDivElement>(null)
@@ -114,6 +125,8 @@ export default function FeedbackForm({
       setTouched({})
       setErrors({})
       setShowSummary(false)
+      setConsents(NO_CONSENTS)
+      setConsentError(false)
       setStatus('idle')
     } else if (preset.topic && !topics.includes(preset.topic)) {
       setTopics([...topics, preset.topic])
@@ -153,9 +166,12 @@ export default function FeedbackForm({
     setErrors(errs)
     setTouched({ name: true, contact: true, message: true })
     const firstInvalid = FIELDS.find((f) => errs[f])
-    if (firstInvalid) {
+    const noConsent = !consents.personalData
+    setConsentError(noConsent)
+    if (firstInvalid || noConsent) {
       setShowSummary(true)
-      inputs.current[firstInvalid]?.focus()
+      if (firstInvalid) inputs.current[firstInvalid]?.focus()
+      else consentRef.current?.focus()
       return
     }
     setShowSummary(false)
@@ -169,7 +185,7 @@ export default function FeedbackForm({
     sending.current = true
     setStatus('sending')
     try {
-      await sendFeedback(buildPayload(values, topicLabels(), lang))
+      await sendFeedback(buildPayload(values, topicLabels(), lang, consents))
       setStatus('success')
     } catch (err) {
       setFailure(err === 'timeout' || err === 'network' ? err : 'server')
@@ -179,11 +195,19 @@ export default function FeedbackForm({
     }
   }
 
-  const invalidFields = FIELDS.filter((f) => errors[f])
   const fieldLabel: Record<FieldName, string> = {
     name: copy.fields.name,
     contact: copy.fields.contact,
     message: copy.fields.message,
+  }
+  const invalidFields = FIELDS.filter((f) => errors[f])
+  const summaryItems = [
+    ...invalidFields.map((f) => fieldLabel[f]),
+    ...(consentError ? [copy.consents.label.toLowerCase()] : []),
+  ]
+  const toggleConsent = (key: keyof Consents) => (_: unknown, checked: boolean) => {
+    setConsents((c) => ({ ...c, [key]: checked }))
+    if (key === 'personalData' && checked) setConsentError(false)
   }
   const isSending = status === 'sending'
 
@@ -193,6 +217,8 @@ export default function FeedbackForm({
     setTouched({})
     setErrors({})
     setShowSummary(false)
+    setConsents(NO_CONSENTS)
+    setConsentError(false)
     setStatus('idle')
   }
 
@@ -400,9 +426,87 @@ export default function FeedbackForm({
               />
             </Box>
 
-            {showSummary && invalidFields.length > 0 && (
+            <Box
+              role="group"
+              aria-label={copy.consents.label}
+              sx={{ mt: 3.5, display: 'flex', flexDirection: 'column', gap: 1.25 }}
+            >
+              {CONSENT_KEYS.map((key) => {
+                const required = key === 'personalData'
+                const invalid = required && consentError
+                const label = required ? (
+                  <>
+                    {copy.consents.personalData.before}
+                    <Link
+                      component="button"
+                      type="button"
+                      onClick={(e: React.MouseEvent) => {
+                        e.preventDefault()
+                        e.stopPropagation()
+                        setPolicyOpen(true)
+                      }}
+                      sx={{ ...textLinkSx, font: 'inherit', verticalAlign: 'baseline', textAlign: 'left' }}
+                    >
+                      {copy.consents.personalData.link}
+                    </Link>
+                    {copy.consents.personalData.after}
+                    <Box component="span" aria-hidden sx={{ color: colors.gold }}> *</Box>
+                  </>
+                ) : (
+                  copy.consents[key]
+                )
+                return (
+                  <Box key={key}>
+                    <FormControlLabel
+                      disabled={isSending}
+                      control={
+                        <Checkbox
+                          checked={consents[key]}
+                          onChange={toggleConsent(key)}
+                          slotProps={{
+                            input: {
+                              ref: required ? consentRef : undefined,
+                              'aria-required': required || undefined,
+                              'aria-invalid': invalid || undefined,
+                              'aria-describedby': invalid ? id('consent-error') : undefined,
+                            } as React.InputHTMLAttributes<HTMLInputElement> & { ref?: React.Ref<HTMLInputElement> },
+                          }}
+                          sx={{
+                            p: 0.5,
+                            mr: 1.25,
+                            mt: '-1px',
+                            color: invalid ? 'error.main' : 'rgba(244,241,236,0.4)',
+                            '&.Mui-checked': { color: colors.gold },
+                            '&.Mui-focusVisible': { outline: `2px solid ${colors.gold}`, outlineOffset: '1px', borderRadius: 1 },
+                          }}
+                        />
+                      }
+                      label={label}
+                      sx={{
+                        alignItems: 'flex-start',
+                        m: 0,
+                        '& .MuiFormControlLabel-label': {
+                          fontSize: 13,
+                          lineHeight: 1.5,
+                          pt: '5px',
+                          color: invalid ? 'error.main' : 'rgba(244,241,236,0.72)',
+                        },
+                        '& .MuiFormControlLabel-label.Mui-disabled': { color: colors.muted },
+                      }}
+                    />
+                    {invalid && (
+                      <Typography id={id('consent-error')} sx={{ ml: '42px', mt: 0.25, fontSize: 12, color: 'error.main' }}>
+                        {copy.errors.personalDataRequired}
+                      </Typography>
+                    )}
+                  </Box>
+                )
+              })}
+            </Box>
+
+            {showSummary && summaryItems.length > 0 && (
               <Typography role="alert" sx={{ mt: 3, fontSize: 14, color: 'error.main' }}>
-                {copy.errors.summary} {invalidFields.map((f) => fieldLabel[f]).join(', ')}
+                {copy.errors.summary} {summaryItems.join(', ')}
               </Typography>
             )}
 
@@ -432,9 +536,6 @@ export default function FeedbackForm({
               >
                 {isSending ? copy.sending : copy.submit}
               </Button>
-              <Typography sx={{ fontSize: 12, lineHeight: 1.5, color: colors.muted, maxWidth: { sm: 260 } }}>
-                {copy.consent}
-              </Typography>
             </Stack>
             <Box component="span" aria-live="polite" sx={visuallyHidden}>
               {isSending ? copy.sending : ''}
@@ -442,6 +543,7 @@ export default function FeedbackForm({
           </Box>
         </>
       )}
+      <PrivacyDialog open={policyOpen} onClose={() => setPolicyOpen(false)} />
     </Wrapper>
   )
 }

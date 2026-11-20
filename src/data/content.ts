@@ -343,8 +343,19 @@ const ru = {
       contactInvalid: 'Нужен email (name@mail.ru), Telegram-ник (@username) или ссылка t.me',
       messageRequired: 'Напишите пару слов о задаче',
       messageShort: 'Слишком коротко — хотя бы 10 символов',
+      personalDataRequired: 'Без согласия на обработку данных мы не сможем ответить',
     },
-    consent: 'Нажимая кнопку, вы соглашаетесь на обработку персональных данных',
+    consents: {
+      label: 'Согласия',
+      personalData: {
+        before: 'Даю согласие на обработку персональных данных и принимаю ',
+        link: 'Политику конфиденциальности',
+        after: '',
+      },
+      newsletter: 'Хочу получать рассылку SAFAROFF: кейсы, новости и полезные материалы — не чаще раза в месяц',
+      nda: 'Перед обсуждением деталей нужно подписать NDA',
+      call: 'Можно позвонить или написать в мессенджер для уточнения деталей',
+    },
     submit: 'Отправить',
     sending: 'Отправляем…',
     success: {
@@ -592,8 +603,19 @@ const en: Content = {
       contactInvalid: 'Use an email (name@mail.com), a Telegram handle (@username) or a t.me link',
       messageRequired: 'Write a few words about the task',
       messageShort: 'Too short — at least 10 characters',
+      personalDataRequired: 'We need your consent to process your data to reply',
     },
-    consent: 'By clicking the button, you agree to the processing of your personal data',
+    consents: {
+      label: 'Consents',
+      personalData: {
+        before: 'I consent to the processing of my personal data and accept the ',
+        link: 'Privacy Policy',
+        after: '',
+      },
+      newsletter: 'Send me the SAFAROFF newsletter: cases, news and useful materials — at most once a month',
+      nda: 'An NDA must be signed before discussing details',
+      call: 'You may call me or message me in a messenger to clarify details',
+    },
     submit: 'Send',
     sending: 'Sending…',
     success: {
@@ -838,8 +860,19 @@ const tg: Content = {
       contactInvalid: 'Email (name@mail.ru), ники Telegram (@username) ё истиноди t.me лозим аст',
       messageRequired: 'Дар бораи вазифа чанд сухан нависед',
       messageShort: 'Хеле кӯтоҳ — ақаллан 10 аломат',
+      personalDataRequired: 'Бе розигӣ ба коркарди маълумот мо ҷавоб дода наметавонем',
     },
-    consent: 'Бо пахш кардани тугма, шумо ба коркарди маълумоти шахсӣ розӣ мешавед',
+    consents: {
+      label: 'Розигиҳо',
+      personalData: {
+        before: 'Ба коркарди маълумоти шахсии худ розӣ ҳастам ва ',
+        link: 'Сиёсати махфиятро',
+        after: ' қабул мекунам',
+      },
+      newsletter: 'Мехоҳам хабарномаи SAFAROFF-ро гирам: кейсҳо, навигариҳо ва маводи муфид — на бештар аз як бор дар як моҳ',
+      nda: 'Пеш аз муҳокимаи тафсилот бояд NDA имзо шавад',
+      call: 'Барои аниқ кардани тафсилот метавонед занг занед ё дар мессенҷер нависед',
+    },
     submit: 'Фиристодан',
     sending: 'Фиристода истодаем…',
     success: {
